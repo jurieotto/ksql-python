@@ -36,16 +36,16 @@ class KSQLAPI(object):
 
     def get_properties(self):
         properties = self.sa.ksql("show properties;")
-        return properties[0]['properties']['properties']
+        return properties[0]['properties']
 
     def ksql(self, ksql_string, streams_properties=None):
         return self.sa.ksql(ksql_string, streams_properties=streams_properties)
 
     def query(self, query_string, encoding='utf-8', chunk_size=128, streams_properties=None):
-        self.sa.query(query_string=query_string,
-                      encoding=encoding,
-                      chunk_size=chunk_size,
-                      streams_properties=streams_properties)
+        yield from self.sa.query(query_string=query_string,
+                                 encoding=encoding,
+                                 chunk_size=chunk_size,
+                                 streams_properties=streams_properties)
 
     def create_stream(
             self,

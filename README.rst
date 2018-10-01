@@ -77,20 +77,22 @@ Options
 query
 ^^^^^
 
-It will execute sql query and keep listening streaming data.
+It will execute sql query and keep listening to streaming data.
 
 .. code:: python
 
-    client.query('select * from table1')
+    response_stream = client.query('select * from table1')
+    for row in response_stream:
+        print(row)
 
 -  Example Response
 
    ::
 
-       {"row":{"columns":[1512787743388,"key1",1,2,3]},"errorMessage":null}
-       {"row":{"columns":[1512787753200,"key1",1,2,3]},"errorMessage":null}
-       {"row":{"columns":[1512787753488,"key1",1,2,3]},"errorMessage":null}
-       {"row":{"columns":[1512787753888,"key1",1,2,3]},"errorMessage":null}
+       {"row":{"columns":[1512787743388,"key1",1,2,3]},"errorMessage":null,"finalMessage":null}
+       {"row":{"columns":[1512787753200,"key1",1,2,3]},"errorMessage":null,"finalMessage":null}
+       {"row":{"columns":[1512787753488,"key1",1,2,3]},"errorMessage":null,"finalMessage":null}
+       {"row":{"columns":[1512787753888,"key1",1,2,3]},"errorMessage":null,"finalMessage":null}
 
 Options
 ^^^^^^^
